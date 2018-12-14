@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <title>NyanTracker</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">NyanTracker</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="sass.html" class="btn clear-btn  lighten-3">CLEAR ALL</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li><a href="collapsible.html">Javascript</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
+    </ul>
+
+    <br />
+
+    <div class="container">
+      <!-- form -->
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title"> Add Meal/Food Item </span>
+          <form class="col">
+            <div class="row">
+              <div class="input-field col s6">
+                <input
+                  type="text"
+                  name=""
+                  id="item-name"
+                  placeholder="add item"
+                />
+                <label for="item-name">Meal</label>
+              </div>
+              <div class="input-field col s6">
+                <input
+                  type="number"
+                  name=""
+                  id="item-calories"
+                  placeholder="add calories"
+                />
+                <label for="item-calories">Calories</label>
+              </div>
+              <button class="add-btn btn darken-3">
+                <i class="fas fa-plus"></i> Add Meal
+              </button>
+
+              <button class="update-btn btn orange">
+                <i class="far fa-edit"></i> Update Meal
+              </button>
+              <button class="delete-btn btn red">
+                <i class="fas fa-trash"></i> Remove Meal
+              </button>
+
+              <button class="back-btn btn grey right">
+                <i class="fas fa-chevron-left"></i> Back
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Calorie Count -->
+      <h3 class="center">
+        Total Calories: <span class="total-calories">0</span>
+      </h3>
+
+      <!-- Meal List -->
+      <ul id="item-list" class="collection">
+        <!--
+          <li class="collection-item" id="item-0">
+            <strong>Wreed Roti : </strong> <em>12000</em>
+            <a href="#" class="secondary-content"><i class="far fa-edit"></i></a>
+          </li>
+          <li class="collection-item" id="item-1">
+            <strong>Wreed Soato : </strong> <em>10</em>
+            <a href="#" class="secondary-content"><i class="far fa-edit"></i></a>
+          </li>
+          <li class="collection-item" id="item-2">
+            <strong>Wreed Bami : </strong> <em>2000</em>
+            <a href="#" class="secondary-content"><i class="far fa-edit"></i></a>
+          </li>
+        -->
+      </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
