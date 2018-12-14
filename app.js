@@ -70,6 +70,23 @@ const itemCtrl = (function() {
       });
       return found;
     },
+
+    deleteItem: id => {
+      // get id
+
+      const ids = data.items.map(item => {
+        return item.id;
+      });
+
+      // get index
+      const index = ids.indexOf(id);
+
+      // remove item
+      data.items.splice(index, 1);
+    },
+    clearAllItems: () => {
+      data.items = [];
+    },
     setCurrentItem: item => {
       data.currentItem = item;
     },
@@ -102,6 +119,7 @@ const uiCtrl = (() => {
     updateBtn: ".update-btn",
     deleteBtn: ".delete-btn",
     backBtn: ".back-btn",
+    clearBtn: ".clear-btn",
     itemNameInput: "#item-name",
     itemCaloriesInput: "#item-calories",
     totalCalories: ".total-calories"
@@ -158,6 +176,21 @@ const uiCtrl = (() => {
           }:</strong> <em>${item.calories} Calories</em>
           <a href="#" class="secondary-content"><i class="edit-item far fa-edit"></i></a>`;
         }
+      });
+    },
+    deleteListItem: id => {
+      const itemId = `#item-${id}`;
+      const item = document.querySelector(itemId);
+      item.remove();
+    },
+    removeItems: () => {
+      let listItems = document.querySelectorAll(uiSelector.listItems); //returns nodelist
+
+      // turn nodelist into array
+      listItems = Array.from(listItems);
+
+      listItems.forEach(item => {
+        item.remove();
       });
     },
     clearInput: () => {
@@ -227,6 +260,18 @@ const appCtrl = ((itemCtrl, uiCtrl) => {
     document
       .querySelector(uiSelectors.updateBtn)
       .addEventListener("click", itemUpdateSubmit);
+    // Back btn event
+    document
+      .querySelector(uiSelectors.backBtn)
+      .addEventListener("click", uiCtrl.clearEditState);
+    // Delete item event
+    document
+      .querySelector(uiSelectors.deleteBtn)
+      .addEventListener("click", itemDeleteSubmit);
+    // clear all item event
+    document
+      .querySelector(uiSelectors.clearBtn)
+      .addEventListener("click", clearAllItemsClick);
   };
 
   //add item submit
@@ -290,6 +335,37 @@ const appCtrl = ((itemCtrl, uiCtrl) => {
     uiCtrl.clearEditState();
   };
 
+  // Delete item
+  const itemDeleteSubmit = e => {
+    e.preventDefault();
+    // get current item
+    const currentItem = itemCtrl.getCurrentItem();
+
+    // delete from datastructure
+    itemCtrl.deleteItem(currentItem.id);
+
+    // delete from ui
+    uiCtrl.deleteListItem(currentItem.id);
+
+    const totalCalories = itemCtrl.getTotalCalories();
+    // add total calories to ui
+    uiCtrl.showTotalCalories(totalCalories);
+
+    uiCtrl.clearEditState();
+  };
+  const clearAllItemsClick = e => {
+    // delete all items from datastructure
+    itemCtrl.clearAllItems();
+
+    const totalCalories = itemCtrl.getTotalCalories();
+    // add total calories to ui
+    uiCtrl.showTotalCalories(totalCalories);
+
+    uiCtrl.clearEditState();
+
+    // Remove from ui
+    uiCtrl.removeItems();
+  };
   // Public Methods
   return {
     init: () => {
