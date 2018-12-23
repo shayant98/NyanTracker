@@ -1,5 +1,5 @@
 # NyanTracker
-A calorie tracking application build to test the **Revealing Module** pattern and **State Management**.
+A calorie tracking application build to test the **Revealing Module Pattern** and **State Management**.
 
 ## Dependancies
 * Materialize CSS
