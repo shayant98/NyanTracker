@@ -1,43 +1,5 @@
 // storage controller
 
-const storageCtrl = (function() {
-  // public methods
-  return {
-    storeItem: item => {
-      let items;
-      // check if any items in LS
-      if (localStorage.getItem("items") === null) {
-        let items = [];
-        // push new item
-        items.push(item);
-
-        // set LS
-        localStorage.setItem("items", JSON.stringify(items));
-      } else {
-        // get existing LS
-        items = JSON.parse(localStorage.getItem("items"));
-
-        // push new item
-        items.push(item);
-
-        // re Set LS
-        localStorage.setItem("items", JSON.stringify(items));
-      }
-    },
-    getItemsFromLS: () => {
-      let items;
-
-      if (localStorage.getItem("items") === null) {
-        items = [];
-      } else {
-        items = JSON.parse(localStorage.getItem("items"));
-      }
-
-      return items;
-    }
-  };
-})();
-
 // item controller
 const itemCtrl = (function() {
   // item constructor
@@ -49,7 +11,11 @@ const itemCtrl = (function() {
 
   //   data structure/ state
   const data = {
-    items: storageCtrl.getItemsFromLS(),
+    items: [
+      //   { id: 0, name: "Nasi", calories: 300 },
+      //   { id: 1, name: "Bami", calories: 1300 },
+      //   { id: 2, name: "Rijst", calories: 2300 }
+    ],
     currentItem: null,
     totalCalories: 0
   };
@@ -266,7 +232,7 @@ const uiCtrl = (() => {
 })();
 
 // app controller
-const appCtrl = ((itemCtrl, uiCtrl, storageCtrl) => {
+const appCtrl = ((itemCtrl, uiCtrl) => {
   //Load
   const loadEvents = () => {
     //   get Ui Selectors
@@ -324,9 +290,6 @@ const appCtrl = ((itemCtrl, uiCtrl, storageCtrl) => {
       const totalCalories = itemCtrl.getTotalCalories();
       // add total calories to ui
       uiCtrl.showTotalCalories(totalCalories);
-
-      // store in local storage
-      storageCtrl.storeItem(newItem);
       //clear fields
       uiCtrl.clearInput();
     }
@@ -425,7 +388,7 @@ const appCtrl = ((itemCtrl, uiCtrl, storageCtrl) => {
       loadEvents();
     }
   };
-})(itemCtrl, uiCtrl, storageCtrl);
+})(itemCtrl, uiCtrl);
 
 // Initialize App
 appCtrl.init();
